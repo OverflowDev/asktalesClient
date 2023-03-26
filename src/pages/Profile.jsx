@@ -3,9 +3,13 @@ import {useContext, useState} from 'react'
 import AuthContext from '../context/AuthContext'
 
 import {FETCH_USER_QUERY, CHANGE_USER_PASSWORD_MUTATION} from '../graphql/users'
-import { useQuery } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
+
+import { toast } from 'react-hot-toast'
 
 function Profile() {
+
+  const [err, setErr] = useState({})
 
   const {user} = useContext(AuthContext)
 
@@ -29,16 +33,29 @@ function Profile() {
     })
   }
 
+  const [changePassword, {error, loading}] = useMutation(CHANGE_USER_PASSWORD_MUTATION, {
+    onCompleted(){
+      toast.success("Password changed")
+    },
+  })
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-        await loginUSer({
-            variables: formData
-        })
+      await changePassword({
+          variables: {
+            id: usrId,
+            currentPassword: formData.currentPassword,
+            newPassword: formData.newPassword
+          }
+      })
     } catch (error) {
-        toast.error(error)
+        // toast.error(error)
+        console.log(error)
     }
   }
+
+  console.log(error)
 
   return (
     <div>
@@ -93,7 +110,7 @@ function Profile() {
                       name="currentPassword" 
                       value={formData.currentPassword}
                       onChange={onChange}
-                      type="password" 
+                      type="text" 
                       className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow" 
                       placeholder="Enter current Password" 
                     />
@@ -105,7 +122,7 @@ function Profile() {
                       name="newPassword" 
                       value={formData.newPassword}
                       onChange={onChange}
-                      type="password" 
+                      type="text" 
                       className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow" 
                       placeholder="Enter newPassword" 
                     />
@@ -119,6 +136,12 @@ function Profile() {
                   </button>
                 </div>
               </form>
+
+              {err && (
+                <div className="bg-red-100 border border-red-500 text-red-700 px-4 py-3 rounded mt-2">
+                  {error?.graphQLErrors[0].message}
+                </div>
+              )}
             </div>
           </div>
 

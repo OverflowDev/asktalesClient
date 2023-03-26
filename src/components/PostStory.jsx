@@ -40,8 +40,6 @@ function PostStory({visible, onClose}) {
 
   }
 
-// Fetch category 
-
 const [createPost, {error, loading}] = useMutation(CREATE_POST_MUTATION, {
 
   update(cache, { data: {createPost} }) {
