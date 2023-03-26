@@ -55,8 +55,6 @@ function Profile() {
     }
   }
 
-  console.log(error)
-
   return (
     <div>
       {usrLoading ? (
