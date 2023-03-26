@@ -13,10 +13,10 @@ function Landing() {
                             on AskTales
                         </span>
                     </h2>
-                    {/* <Link to='story' className="inline-flex text-white items-center px-6 py-3 font-medium bg-blue-500 rounded-lg hover:opacity-75" href="https://twitter.com/sahilnetic">
-                        <ion-icon name="book-outline"></ion-icon>
-                        &nbsp;  Read More Stories
-                    </Link> */}
+                    <Link to='about' className="inline-flex text-white items-center px-6 py-3 font-medium bg-blue-500 rounded-lg hover:opacity-75" href="https://twitter.com/sahilnetic">
+                        <ion-icon name="information-outline"></ion-icon>
+                        &nbsp;  Learn More
+                    </Link>
                 </div>
             </div>
     
