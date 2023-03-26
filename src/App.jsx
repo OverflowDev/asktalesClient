@@ -26,13 +26,13 @@ import Profile from './pages/Profile';
 function App() {
 
   const httpLink = createHttpLink({
-    // uri: import.meta.env.VITE_SERVER_API_URI,
-    uri: "http://localhost:5000/askTales",
+    uri: import.meta.env.VITE_SERVER_API_URI,
+    // uri: "http://localhost:5000/askTales",
   })
   
   const uploadLink = createUploadLink({
-    // uri: import.meta.env.VITE_SERVER_API_URI,
-    uri: "http://localhost:5000/askTales",
+    uri: import.meta.env.VITE_SERVER_API_URI,
+    // uri: "http://localhost:5000/askTales",
   })
 
   const authLink = setContext((_, { headers }) => {
