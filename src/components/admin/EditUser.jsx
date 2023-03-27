@@ -177,23 +177,38 @@ function EditUser({userId, onClose, visible}) {
           />
         </div>
 
-        {/* email  */}
+        {/* password  */}
         <div className="mb-2">
           <label
-            htmlFor="email"
+            htmlFor="password"
             className="mb-3 block text-base font-medium text-[#07074D]"
           >
-            Email
+            Password
           </label>
           <input
             required
-            name='email'
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            type="email"
-            placeholder="Email"
+            name='password'
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            type="text"
+            placeholder="Password"
             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
           />
+        </div>
+
+        {/* role  */}
+        <div className="mb-4">
+            <label className="block text-gray-800 text-sm font-bold mb-2">Role:</label>
+            <select 
+            name='role'
+            value={role} 
+            onChange={(e) => setRole(e.target.value)}
+            className=" border rounded w-full py-2 px-3 text-gray-800" 
+            >
+            <option>Select a role</option>
+            <option value="storyteller">Storyteller</option>
+            <option value="storyseeker">Storyseeker</option>
+            </select>
         </div>
 
         {/* Button  */}
@@ -202,7 +217,7 @@ function EditUser({userId, onClose, visible}) {
             type='submit'
             className="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
           >
-            {loading ? "Updating...": 'Update Story'}
+            {loading ? "Updating...": 'Update User'}
           </button>
           <br />
         </div>

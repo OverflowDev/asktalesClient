@@ -168,7 +168,7 @@ if(!visible) return null
             ></textarea>
           </div>
 
-          {/* title  */}
+          {/* location  */}
           <div className="mb-2">
             <label
               htmlFor="location"
