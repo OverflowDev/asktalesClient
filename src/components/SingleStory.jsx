@@ -50,7 +50,7 @@ function SingleStory() {
                     </Link>
                 </div>
                 <div className="rounded-2xl mb-4 md:mb-0 w-full max-w-screen-md mx-auto relative h-96">
-                    <div className="absolute left-0 bottom-0 w-full h-full z-10 bg-gradient-to-b from-blue-800/5 to-blue-800/10 bg-clip-padding backdrop-filter backdrop-blur-md backdrop-brightness-50 bg-opacity-50"></div>
+                    <div className="absolute left-0 bottom-0 w-full h-full z-10 bg-gradient-to-b from-blue-800/5 to-blue-800/10 bg-clip-padding backdrop-filter backdrop-blur-sm backdrop-brightness-50 bg-opacity-50"></div>
                     <img 
                         src={post.imageUrl1} 
                         onError={(e) => {

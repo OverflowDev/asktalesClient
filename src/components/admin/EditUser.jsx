@@ -10,8 +10,6 @@ import {UPDATE_USER_MUTATION , FETCH_USER_QUERY, FETCH_USERS_QUERY } from '../..
 
 function EditUser({userId, onClose, visible}) {
 
-    console.log(userId)
-
   const loc = useLocation()
   const navigate = useNavigate()
   const client = useApolloClient()
