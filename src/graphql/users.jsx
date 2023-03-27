@@ -96,3 +96,18 @@ export const DEACTIVATE_USER = gql`
         }
     }
 `
+
+export const UPDATE_USER_MUTATION = gql`
+    mutation UpdateUser($updateUserInput: UpdateUserInput!) {
+        updateUser(updateUserInput: $updateUserInput) {
+            id
+            name
+            email
+            username
+            role
+            isActive
+            isAdmin
+            createdAt
+        }
+    }
+`

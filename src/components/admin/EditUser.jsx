@@ -6,9 +6,9 @@ import { toast } from 'react-hot-toast'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 
-import {UPDATE_POST_MUTATION, FETCH_POST_QUERY, FETCH_POSTS_QUERY } from '../../graphql/posts'
+import {UPDATE_USER_MUTATION , FETCH_USER_QUERY, FETCH_USERS_QUERY } from '../../graphql/users'
 
-function EditUser({postId, onClose, visible}) {
+function EditUser({userId, onClose, visible}) {
 
   const loc = useLocation()
   const navigate = useNavigate()
@@ -16,31 +16,27 @@ function EditUser({postId, onClose, visible}) {
 
   const [err, setErr] = useState({})
 
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [location, setLocation] = useState('')
-  const [imageUrl1, setImageUrl1] = useState('')
-  const [imageUrl2, setImageUrl2] = useState('')
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [role, setRole] = useState('')
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [isActive, setIsActive] = useState(false)
 
-  const { data } = useQuery(FETCH_POST_QUERY, { variables: { postId } })
+  const { data } = useQuery(FETCH_USER_QUERY, { variables: { userId } })
 
-    const dataPost= data?.getPost  || {}
-
-    // const [formData, setFormData] = useState({
-    //     title: dataPost.title || '',
-    //     content: dataPost.content || '',
-    //     location: dataPost.location || '',
-    //     imageUrl1: dataPost.imageUrl1 || '',
-    //     imageUrl2: dataPost.imageUrl2 || '',
-    // })
+    const dataUser= data?.getUser  || {}
 
     useEffect(() => {
-        setTitle(dataPost.title);
-        setContent(dataPost.content);
-        setLocation(dataPost.location);
-        setImageUrl1(dataPost.imageUrl1);
-        setImageUrl2(dataPost.imageUrl2);
-    }, [dataPost])
+        setName(dataUser.name);
+        setUsername(dataUser.username);
+        setEmail(dataUser.email);
+        setPassword(dataUser.password);
+        setRole(dataUser.role);
+        setIsAdmin(dataUser.isAdmin);
+        setIsActive(dataUser.isActive);
+    }, [dataUser])
 
   const onChange = (e) => {
     const { name, value } = e.target
@@ -53,22 +49,18 @@ function EditUser({postId, onClose, visible}) {
 
   }
 
-    const [updatePost, {error,loading}] = useMutation(UPDATE_POST_MUTATION, {
-        refetchQueries: [{ query: FETCH_POSTS_QUERY }],
+    const [updateUser, {error,loading}] = useMutation(UPDATE_USER_MUTATION, {
+        refetchQueries: [{ query: FETCH_USERS_QUERY }],
         onCompleted: (data) => {
           onClose()
-          const deletedPostId = data.deletePost;
+          const deletedUserId = data.deleteUser;
           const updatedData = (cache) => {
-            const data = cache.readQuery({ query: FETCH_POSTS_QUERY });
-            return { posts: data.getPosts.filter((post) => post.id !== deletedPostId) };
+            const data = cache.readQuery({ query: FETCH_USERS_QUERY });
+            return { users: data.getUsers.filter((post) => post.id !== deletedUserId) };
           };
-          client.writeQuery({ query: FETCH_POSTS_QUERY, data: updatedData })
+          client.writeQuery({ query: FETCH_USERS_QUERY, data: updatedData })
   
-          // redirect 
-          if(location.pathname === `/story/${deletedPostId}`){
-            navigate('/')
-          }
-          toast.success("Post Editted successfully!")
+          toast.success("User Editted successfully!")
   
         },
 
@@ -82,15 +74,17 @@ function EditUser({postId, onClose, visible}) {
         e.preventDefault();
       try {
         // const { title, content,location, imageUrl1, imageUrl2 } = formData
-        await updatePost({
+        await updateUser({
             variables: { 
-                updatePostInput: {
-                    id: postId,
-                    title,
-                    content,
-                    location,
-                    imageUrl1,
-                    imageUrl2,
+                updateUserInput: {
+                    id: userId,
+                    name,
+                    username,
+                    email,
+                    role,
+                    password,
+                    isAdmin,
+                    isActive,
                 }
             }
         });
@@ -126,101 +120,80 @@ function EditUser({postId, onClose, visible}) {
         onSubmit={onSubmit}
         className="py-2 px-9"
       >
-        {/* title  */}
+        {/* name  */}
         <div className="mb-2">
           <label
-            htmlFor="title"
+            htmlFor="name"
             className="mb-3 block text-base font-medium text-[#07074D]"
           >
-            Title
+            Name
           </label>
           <input
             required
-            name='title'
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
+            name='name'
+            onChange={(e) => setName(e.target.value)}
+            value={name}
             type="text"
-            placeholder="Title"
+            placeholder="Name"
             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
           />
         </div>
 
-
-        {/* Content  */}
+        {/* username  */}
         <div className="mb-2">
           <label
-            htmlFor="content"
+            htmlFor="username"
             className="mb-3 block text-base font-medium text-[#07074D]"
           >
-            Content
-          </label>
-          <textarea
-            type='text'
-            value={content}
-            name='content'
-            onChange={(e) => setContent(e.target.value)}
-            rows="3"
-            placeholder="Your Story"
-            className="w-full rounded py-3 px-[14px] text-gray-800 text-base border border-gray-700 resize-none outline-none focus-visible:shadow-none focus:border-primary"
-          ></textarea>
-        </div>
-
-        {/* title  */}
-        <div className="mb-2">
-          <label
-            htmlFor="location"
-            className="mb-3 block text-base font-medium text-[#07074D]"
-          >
-            Location
+            Username
           </label>
           <input
             required
-            name='location'
-            onChange={(e) => setLocation(e.target.value)}
-            value={location}
+            name='username'
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
             type="text"
-            placeholder="Location"
+            placeholder="Username"
             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
           />
         </div>
 
-
-        {/* Image1  */}
-        <div className="mb-4 ">
-          {/* <input type="file" name="image" onChange={handleImageChange} /> */}
+        {/* email  */}
+        <div className="mb-2">
           <label
-            htmlFor="image2"
+            htmlFor="email"
             className="mb-3 block text-base font-medium text-[#07074D]"
           >
-            Image Link 1
+            Email
           </label>
-          <input 
-            type="text" 
-            name='image1' 
-            value={imageUrl1} 
-            onChange={(e) => setImageUrl1(e.target.value)} 
-            placeholder="https://Image-link"
+          <input
+            required
+            name='email'
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            type="email"
+            placeholder="Email"
             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
           />
         </div>
-        {/* Image2  */}
-        <div className="mb-6 ">
-          {/* <input type="file" name="image" onChange={handleImageChange} /> */}
+
+        {/* email  */}
+        <div className="mb-2">
           <label
-            htmlFor="image2"
+            htmlFor="email"
             className="mb-3 block text-base font-medium text-[#07074D]"
           >
-            Image Link 2
+            Email
           </label>
-          <input 
-            type="text" 
-            name='image2' 
-            value={imageUrl2} 
-            onChange={(e) => setImageUrl2(e.target.value)}  
-            placeholder="https://Image-link"
+          <input
+            required
+            name='email'
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            type="email"
+            placeholder="Email"
             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
           />
-          <div className='text-red-500'>Note: Make sure you paste right link</div>
         </div>
 
         {/* Button  */}
