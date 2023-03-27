@@ -57,7 +57,7 @@ function Stories({usr}) {
     if (error) console.log(error)
 
   return (
-    <div className='mt-8 w-full md:px-24 px-6 ' >
+    <div className='mt-2 w-full md:px-24 px-6 ' >
         <h1 className='text-center text-3xl font-bold uppercase underline underline-offset-2'>Stories</h1>
         {/* new post  */}
         <div className='flex justify-end'>
@@ -99,7 +99,7 @@ function Stories({usr}) {
                                 <button
                                     key={i}
                                     onClick={fetchFilterData(val)}
-                                    className={`py-2 px-4 rounded-md whitespace-nowrap uppercase w-fit ${active === val || 'All' ? 'bg-gray-400 text-gray-900' : 'bg-gray-200' }`}
+                                    className={`py-2 px-4 rounded-md whitespace-nowrap uppercase w-fit ${active === val ? 'bg-gray-400 text-gray-900' : 'bg-gray-200' }`}
                                 >
                                     {val}
                                 </button>

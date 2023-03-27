@@ -54,7 +54,7 @@ function Landing() {
                 locations to pay a visit to once you are in Rome and have a wide experience a touristic heritage, art, and culture
                 of the Romans.
             </p>
-            <Link to='story' className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            <Link to='story' className="bg-blue-400 text-white px-4 py-2 rounded hover:bg-blue-800">
                 Read More
             </Link>
           </div>
