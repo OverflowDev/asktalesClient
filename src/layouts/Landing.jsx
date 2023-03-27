@@ -41,10 +41,10 @@ function Landing() {
             <img src='https://res.klook.com/image/upload/fl_lossy.progressive,q_85/w_1920,c_fill/cities/n6pfqvaabvory1mhoh3q.webp' alt="Rome" className="w-96 h-96 object-cover" />
           </div>
           <div className="md:w-full md:ml-4">
-            <p class="text-lg mb-4">
+            <p className="text-lg mb-4">
                 As people commonly say, when you are in Rome, you behave like a Roman. This statement infers the degree of tourism
                 in the city and the unquenching desire to visit for people considering a vacation. Rome
-                (<span class="font-medium">41&deg;53'36&quot;N 12&deg;28'58&quot;E</span>) is the capital city of Italy having
+                (<span className="font-medium">41&deg;53'36&quot;N 12&deg;28'58&quot;E</span>) is the capital city of Italy having
                 2,860,009 residents in 1,285 km<sup>2</sup> (496.1 sq mi), Rome is the country's most populated comune and the
                 third most populous city in the European Union by population. Also, Rome as part of the Metropolitan City of Rome,
                 has a population of 4,355,725 residents, and the Metropolitan City of Rome is the most populous metropolitan city

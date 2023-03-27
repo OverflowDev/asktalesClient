@@ -23,7 +23,7 @@ function Home() {
   const usr = data?.getUser
 
   return (
-    <div className=''>
+    <div >
       <Landing />
     <div className='md:px-24 px-6 mt-4'>
     

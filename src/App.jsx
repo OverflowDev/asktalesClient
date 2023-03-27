@@ -22,6 +22,7 @@ import SingleStory from './components/SingleStory';
 import NotFound from './pages/NotFound';
 import Dashboard from './components/Dashboard';
 import Profile from './pages/Profile';
+import AdminRoute from './util/AdminRoute';
 
 function App() {
 
@@ -95,29 +96,39 @@ function App() {
 
               <Route path='/about' exact element={<About />} />
               <Route path='/contact' exact element={<Contact />} />
-              <Route path='/dashboard' exact element={<Dashboard />} />
+              {/* <Route path='/dashboard' exact element={<Dashboard />} /> */}
               <Route path='/profile' exact element={<Profile />} />
               <Route path='/*' exact element={<NotFound />} />
 
+              {/* Admin */}
+              <Route 
+                path='/dashboard' 
+                exact 
+                element={
+                  <AdminRoute>
+                      <Dashboard />
+                  </AdminRoute>
+                } 
+              />
               {/* Auth */}
               <Route 
-                    path='/login' 
-                    exact 
-                    element={
-                      <AuthRoute>
-                          <Login />
-                      </AuthRoute>
-                    } 
-                  />
-                  <Route 
-                    path='/register' 
-                    exact 
-                    element={
-                      <AuthRoute>
-                          <Register />
-                      </AuthRoute>
-                    } 
-                  />
+                path='/login' 
+                exact 
+                element={
+                  <AuthRoute>
+                      <Login />
+                  </AuthRoute>
+                } 
+              />
+              <Route 
+                path='/register' 
+                exact 
+                element={
+                  <AuthRoute>
+                      <Register />
+                  </AuthRoute>
+                } 
+              />
 
           </Routes>
         </div>

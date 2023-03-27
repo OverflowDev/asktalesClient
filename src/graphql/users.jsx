@@ -75,6 +75,23 @@ export const FETCH_USERS_QUERY = gql`
             email
             username
             role
+            isActive
+            isAdmin
+            createdAt
+        }
+    }
+`
+
+export const DEACTIVATE_USER = gql`
+    mutation DeactivateUser {
+        deactivateUser {
+            id
+            name
+            email
+            username
+            role
+            isActive
+            isAdmin
             createdAt
         }
     }
