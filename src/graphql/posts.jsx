@@ -10,6 +10,17 @@ export const FETCH_POSTS_QUERY = gql`
             username
             imageUrl1
             imageUrl2
+            likeCount
+            likes{
+                username
+            }
+            commentCount
+            comments {
+                id
+                username
+                body
+                createdAt
+            }
             createdAt
         }
     }
@@ -25,6 +36,17 @@ export const FETCH_POST_QUERY = gql`
             username
             imageUrl1
             imageUrl2
+            likeCount
+            likes{
+                username
+            }
+            commentCount
+            comments {
+                id
+                username
+                body
+                createdAt
+            }
             createdAt
         }
     }
@@ -65,6 +87,19 @@ export const DELETE_POST_MUTATION = gql`
     mutation DeletePostMutation($postId: ID!) {
         deletePost(postId: $postId) {
             id
+        }
+    }
+`
+
+export const LIKE_POST_MUTATION = gql`
+    mutation likeQuoteMutation($postId: ID!) {
+        likeQuote(postId: $postId) {
+            id
+            likes {
+                id
+                username
+            }
+            likeCount
         }
     }
 `

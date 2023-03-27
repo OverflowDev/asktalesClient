@@ -60,18 +60,28 @@ function Stories({usr}) {
     <div className='mt-2 w-full md:px-24 px-6 ' >
         {/* new post  */}
         <div className='flex justify-end'>
-          {user && <div>
-              {usr?.role === 'storyteller' && <div>
-                    <button 
-                        onClick={() => setShowNewPostButton(true)}
-                        className='flex items-center px-4 py-2 bg-blue-200 hover:bg-blue-100 rounded-md space-x-2 shadow-inner text-black'
-                        >
-                        <ion-icon name="add-circle-outline"></ion-icon>
-                        <span className='font-semibold'>New Story</span>
-                    </button>
-                </div>}
-          </div>
-          }
+        {user && <div>
+            {usr?.role === 'storyteller' && <div>
+                <button 
+                onClick={() => setShowNewPostButton(true)}
+                className='flex items-center px-4 py-2 bg-blue-200 hover:bg-blue-100 rounded-md space-x-2 shadow-inner text-black'
+                >
+                <ion-icon name="add-circle-outline"></ion-icon>
+                <span className='font-semibold'>New Story</span>
+                </button>
+            </div>}
+            {usr?.isAdmin && <div>
+                <button 
+                onClick={() => setShowNewPostButton(true)}
+                className='flex items-center px-4 py-2 bg-blue-200 hover:bg-blue-100 rounded-md space-x-2 shadow-inner text-black'
+                >
+                <ion-icon name="add-circle-outline"></ion-icon>
+                <span className='font-semibold'>New Post</span>
+                </button>
+            </div>
+            }
+            </div>
+        }
         </div>
         {loading ? (
             <div className='flex justify-center'>

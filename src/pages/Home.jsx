@@ -28,6 +28,7 @@ function Home() {
     <div className='md:px-24 px-6 mt-4'>
     
       <div className='w-full'>
+        <h1 className='text-center text-3xl font-bold uppercase underline underline-offset-2'>Stories</h1>
         <Stories usr={usr} />
       </div>
       

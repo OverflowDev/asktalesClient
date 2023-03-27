@@ -9,6 +9,8 @@ import { useQuery } from '@apollo/client'
 import moment from 'moment/moment';
 
 import {FETCH_POST_QUERY} from '../graphql/posts'
+import Comments from './Comments';
+import PostComment from './PostComment';
 
 function SingleStory() {
 
@@ -48,9 +50,9 @@ function SingleStory() {
                     </Link>
                 </div>
                 <div className="rounded-2xl mb-4 md:mb-0 w-full max-w-screen-md mx-auto relative h-96">
-                    <div className="absolute left-0 bottom-0 w-full h-full z-10 bg-gradient-to-b from-blue-800/5 to-blue-800/10 bg-clip-padding backdrop-filter backdrop-blur-sm backdrop-brightness-90 bg-opacity-50"></div>
+                    <div className="absolute left-0 bottom-0 w-full h-full z-10 bg-gradient-to-b from-blue-800/5 to-blue-800/10 bg-clip-padding backdrop-filter backdrop-blur-md backdrop-brightness-50 bg-opacity-50"></div>
                     <img 
-                        src={post.imageUrl} 
+                        src={post.imageUrl1} 
                         onError={(e) => {
                             e.target.onerror = null; 
                             e.target.src = 'https://media.istockphoto.com/id/515807051/photo/short-story-in-wood-type.jpg?s=612x612&w=0&k=20&c=h36rZbsPgLPGNZlPa139WhglQXDRfFRxKRNSDyk7jR4=';
@@ -59,17 +61,11 @@ function SingleStory() {
                         alt='postImage' 
                     />
                     <div className="p-4 absolute bottom-0 left-0 z-20">
-                        <div className="px-4 py-1 bg-blue-800 text-gray-100 tracking-wide inline-flex items-center justify-center mb-2 rounded-md">
-                            {post.category}
+                        <div className="px-4 py-1 bg-blue-800 text-gray-100 tracking-wide inline-flex capitalize items-center justify-center mb-2 rounded-md">
+                            {post.location}
                         </div>
                         <h2 className="text-4xl font-semibold text-gray-100 leading-tight uppercase">
                             {post.title}
-                        </h2>
-                        <h2 className="text-sm font-semibold text-blue-200 leading-tight uppercase">
-                            By: {post.author}
-                        </h2>
-                        <h2 className="text-lg font-semibold text-gray-100 leading-tight capitalize">
-                            {post.chapter}
                         </h2>
                         <div className="flex mt-3">
                             <img src="https://www.pngkey.com/png/full/72-729716_user-avatar-png-graphic-free-download-icon.png" className="h-10 w-10 rounded-full mr-2 object-cover" alt='img' />
@@ -80,32 +76,37 @@ function SingleStory() {
                         </div>
                     </div>
                 </div>
-                {!user ? (
-                    <div className="px-4 text-center lg:px-24 mt-12 text-gray-700 flex justify-center w-screen mx-auto text-lg leading-relaxed">
-                        <p className="pb-6">
-                            <div className="mb-4 tracking-wide">
-                                <p dangerouslySetInnerHTML={{__html: content}}
-                                >
-                                </p>
-                                <div className='mt-3'>
-                                    {post?.content.length > 1 && (
-                                        <Link to='/login' className='py-2 px-4 border rounded-md border-blue-700 bg-transparent hover:bg-blue-400 hover:border-none capitalize' >Login to read more</Link>
-                                    )}
-                                </div>
+                <div className="px-4 text-center lg:px-24 mt-12 text-gray-700 flex justify-center w-screen mx-auto text-lg leading-relaxed">
+                    <p className="pb-6">
+                        {paragraphs.map((paragraph, index) => (
+                            <div key={index} className="mb-4 tracking-wide">
+                                <p>{paragraph}</p>
                             </div>
-                        </p>
-                    </div>
-                ) : (
-                    <div className="px-4 text-center lg:px-24 mt-12 text-gray-700 flex justify-center w-screen mx-auto text-lg leading-relaxed">
-                        <p className="pb-6">
-                            {paragraphs.map((paragraph, index) => (
-                                <div key={index} className="mb-4 tracking-wide">
-                                    <p>{paragraph}</p>
-                                </div>
-                            ))}
-                        </p>
-                    </div>
-                )}
+                        ))}
+                    </p>
+                </div>
+                <div className='flex justify-center'>
+                    <img 
+                        src={post.imageUrl2} 
+                        onError={(e) => {
+                            e.target.onerror = null; 
+                            e.target.src = 'https://media.istockphoto.com/id/515807051/photo/short-story-in-wood-type.jpg?s=612x612&w=0&k=20&c=h36rZbsPgLPGNZlPa139WhglQXDRfFRxKRNSDyk7jR4=';
+                        }} 
+                        className="w-[700px] h-96 z-0 object-cover " 
+                        alt='postImage' 
+                    />
+                </div>
+
+                {/* Comments  */}
+                <div className='flex flex-col gap-8'>
+                    {user && (<PostComment />)}
+                        <h1 className='font-semibold text-2xl px-12'>Comments</h1>
+                        {post?.comments.map((comment) => (
+                        <Comments key={comment.id} user={user} comment={comment} postId={post?.id}  />
+                    ))}
+                    {/* <PostComment />
+                    <Comments /> */}
+                </div>
             </div>
         )}
 

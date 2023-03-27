@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import AuthContext from '../context/AuthContext';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
+import LikeButton from './LikeButton';
 
 function Story({post}) {
 
@@ -23,19 +24,23 @@ function Story({post}) {
         title,
         content,
         location,
+        imageUrl1,
         createdAt
     } = post
 
   return (
     <div className="p-2 md:w-1/3 ">
       <div className='h-full rounded-xl shadow-cla-blue bg-gradient-to-r from-indigo-50 to-blue-50 overflow-hidden'>
-        <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src="https://images.unsplash.com/photo-1618172193622-ae2d025f4032?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80" alt="blog" />
+        <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src={imageUrl1} alt="blog" />
         <div className="p-6 ">
-          <div className='flex justify-between'>
+          <div className='flex items-center justify-between'>
             <h2 className="tracking-widest text-xs title-font font-medium mb-1 text-gray-500 flex items-center uppercase">
               <span><ion-icon name="location-outline"></ion-icon></span>
               {location}
             </h2>
+            {/* <div className='flex items-center'>
+              <LikeButton user={user} post={post} />
+            </div> */}
             <div className="text-xs text-neutral-500">• {moment(createdAt).fromNow(true)}</div>
           </div>
           <h1 className="title-font text-lg font-medium text-gray-800 mb-2 uppercase">{title}</h1>

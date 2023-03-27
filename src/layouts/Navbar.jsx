@@ -59,9 +59,9 @@ function Navbar() {
                     <Link to='/' className='inline-block uppercase font-semibold tracking-wide hover:text-blue-800'>
                         Home
                     </Link>
-                    {/* <Link to='story' className='inline-block uppercase font-semibold tracking-wide hover:text-blue-800'>
+                    <Link to='story' className='inline-block uppercase font-semibold tracking-wide hover:text-blue-800'>
                         Stories
-                    </Link> */}
+                    </Link>
                     <Link to='about' className='inline-block uppercase font-semibold tracking-wide hover:text-blue-800'>
                         About Us
                     </Link>
