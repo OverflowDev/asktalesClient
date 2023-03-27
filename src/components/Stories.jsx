@@ -99,7 +99,7 @@ function Stories({usr}) {
                                 <button
                                     key={i}
                                     onClick={fetchFilterData(val)}
-                                    className={`py-2 px-4 rounded-md whitespace-nowrap uppercase w-fit ${active === val ? 'bg-gray-400 text-gray-900' : 'bg-gray-200' }`}
+                                    className={`py-2 px-4 rounded-md whitespace-nowrap uppercase w-fit ${active === val || 'All' ? 'bg-gray-400 text-gray-900' : 'bg-gray-200' }`}
                                 >
                                     {val}
                                 </button>
