@@ -97,7 +97,7 @@ function App() {
               <Route path='/about' exact element={<About />} />
               <Route path='/contact' exact element={<Contact />} />
               {/* <Route path='/dashboard' exact element={<Dashboard />} /> */}
-              {/* <Route path='/profile' exact element={<Profile />} /> */}
+              <Route path='/profile' exact element={<Profile />} />
               <Route path='/*' exact element={<NotFound />} />
 
               {/* Admin */}
@@ -108,16 +108,6 @@ function App() {
                   <AdminRoute>
                       <Dashboard />
                   </AdminRoute>
-                } 
-              />
-              {/* Profile */}
-              <Route 
-                path='/profile' 
-                exact 
-                element={
-                  <AuthRoute>
-                      <Profile />
-                  </AuthRoute>
                 } 
               />
               {/* Auth */}
