@@ -35,10 +35,10 @@ function Landing() {
     // </div>
     <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="max-w-6xl w-full px-4">
-        <h1 className="text-4xl font-bold text-center mb-8">Overview of Rome</h1>
+        <h1 className="text-4xl font-bold text-center mb-8 uppercase underline underline-offset-4">Overview of Rome</h1>
         <div className="flex flex-col md:flex-row items-center justify-center">
           <div className="md:w-1/2 mb-4 md:mb-0">
-            <img src='https://res.klook.com/image/upload/fl_lossy.progressive,q_85/w_1920,c_fill/cities/n6pfqvaabvory1mhoh3q.webp' alt="Rome" className="w-96 h-96 object-cover" />
+            <img src='https://res.klook.com/image/upload/fl_lossy.progressive,q_85/w_1920,c_fill/cities/n6pfqvaabvory1mhoh3q.webp' alt="Rome" className="w-96 h-96 object-cover rounded-lg shadow-md" />
           </div>
           <div className="md:w-full md:ml-4">
             <p className="text-lg mb-4">
