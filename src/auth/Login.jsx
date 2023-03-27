@@ -10,6 +10,9 @@ import {LOGIN_USER} from '../graphql/users'
 
 
 function Login() {
+
+  const [err, setErr] = useState({})
+
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -33,7 +36,7 @@ function Login() {
     // })
   }
 
-  const [loginUSer, { loading }] = useMutation(LOGIN_USER, {
+  const [loginUSer, { error,loading }] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
       const token = data.login.token;
       login(token)
@@ -63,8 +66,10 @@ function Login() {
         await loginUSer({
             variables: formData
         })
+      setErr(null)
     } catch (error) {
         toast.error(error)
+        setErr(error)
     }
   }
 

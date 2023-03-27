@@ -117,6 +117,9 @@ function Navbar() {
                         <Link to='about' className='py-3 text-center px-3 text-2xl uppercase font-semibold' onClick={closeMenu}>
                             About Us
                         </Link>
+                        <Link to='profile' className='py-3 text-center px-3 text-2xl uppercase font-semibold' onClick={closeMenu}>
+                            Profile
+                        </Link>
                         {/* <Link to='story' className='py-3 text-center px-3 text-2xl uppercase font-semibold' onClick={closeMenu}>
                             Stories
                         </Link> */}

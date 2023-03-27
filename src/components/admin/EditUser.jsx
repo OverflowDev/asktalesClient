@@ -10,11 +10,11 @@ import {UPDATE_USER_MUTATION , FETCH_USER_QUERY, FETCH_USERS_QUERY } from '../..
 
 function EditUser({userId, onClose, visible}) {
 
+    console.log(userId)
+
   const loc = useLocation()
   const navigate = useNavigate()
   const client = useApolloClient()
-
-  const [err, setErr] = useState({})
 
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
@@ -32,22 +32,11 @@ function EditUser({userId, onClose, visible}) {
         setName(dataUser.name);
         setUsername(dataUser.username);
         setEmail(dataUser.email);
-        setPassword(dataUser.password);
+        // setPassword(dataUser.password);
         setRole(dataUser.role);
         setIsAdmin(dataUser.isAdmin);
         setIsActive(dataUser.isActive);
     }, [dataUser])
-
-  const onChange = (e) => {
-    const { name, value } = e.target
-
-    setFormData({
-      ...formData,
-      // [e.target.name]: e.target.value
-      [name]: value
-    })
-
-  }
 
     const [updateUser, {error,loading}] = useMutation(UPDATE_USER_MUTATION, {
         refetchQueries: [{ query: FETCH_USERS_QUERY }],
@@ -186,7 +175,6 @@ function EditUser({userId, onClose, visible}) {
             Password
           </label>
           <input
-            required
             name='password'
             onChange={(e) => setPassword(e.target.value)}
             value={password}
@@ -211,6 +199,33 @@ function EditUser({userId, onClose, visible}) {
             </select>
         </div>
 
+        <div className="mb-4 flex items-center space-x-8">
+            <div>
+                <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="isAdmin"
+                    checked={isAdmin}
+                    onChange={() => setIsAdmin(!isAdmin)}
+                />
+                <label className="form-check-label" htmlFor="isAdmin">
+                Is Admin
+                </label>
+            </div>
+            <div>
+                <input
+                type="checkbox"
+                className="form-check-input"
+                id="isActive"
+                checked={isActive}
+                onChange={() => setIsActive(!isActive)}
+                />
+                <label className="form-check-label" htmlFor="isActive">
+                Is Active
+                </label>
+            </div>
+        </div>
+
         {/* Button  */}
         <div>
           <button
@@ -221,12 +236,6 @@ function EditUser({userId, onClose, visible}) {
           </button>
           <br />
         </div>
-
-        {err && (
-          <div className="bg-red-100 border border-red-500 text-red-700 px-4 py-3 rounded mt-2">
-            {error?.graphQLErrors[0].message}
-          </div>
-        )}
 
       </form>
 
