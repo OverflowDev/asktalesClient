@@ -29,8 +29,9 @@ function Story({post}) {
     } = post
 
   return (
-    <div className="p-2 md:w-1/3 ">
-      <div className='h-full rounded-xl shadow-cla-blue bg-gradient-to-r from-indigo-50 to-blue-50 overflow-hidden'>
+    <div className="p-2 lg:w-1/3 ">
+      
+      <div className='h-full rounded-xl shadow-blue-500 bg-gradient-to-r from-indigo-50 to-blue-50 overflow-hidden'>
         <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src={imageUrl1} alt="blog" />
         <div className="p-6 ">
           <div className='flex items-center justify-between'>

@@ -9,9 +9,7 @@ import {useQuery, useMutation} from '@apollo/client'
 import {FETCH_USERS_QUERY, DEACTIVATE_USER} from '../../graphql/users'
 
 
-function User({user, i, }) {
-
-    
+function User({user, i}) {
 
     const {id, name, username, email, isAdmin, isActive, role} = user
 

@@ -5,8 +5,13 @@ import {useQuery, useMutation} from '@apollo/client'
 import {FETCH_POSTS_QUERY} from '../../graphql/posts'
 
 import PostPagination from './PostPagination'
+import Post from './Post'
+import DeleteButton from '../DeleteButton'
 
 function Posts() {
+
+    const [showDeleteButton, setShowDeleteButton] = useState(false)
+    const handleOnClose = () => setShowDeleteButton(false)
 
     const {data, error, loading} = useQuery(FETCH_POSTS_QUERY)
 
@@ -18,7 +23,6 @@ function Posts() {
 
     const posts = data?.getPosts.slice(firstUserIndex, lastUserIndex)
 
-    let i = 0
 
   return (
     <div>
@@ -53,43 +57,7 @@ function Posts() {
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                                     {posts?.map((post, i) => (
-                                        <tr key={post.id}>
-                                            {/* Number  */}
-                                            <td className="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                                <div className="inline-flex items-center gap-x-3">
-                                                    <span>{i+1}</span>
-                                                </div>
-                                            </td>
-                                            {/* cutomer  */}
-                                            <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                <div className="flex items-center gap-x-2">
-                                                    <img className="object-cover w-8 h-8 rounded-full" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
-                                                    <div>
-                                                        <h2 className="text-sm font-medium text-gray-800 dark:text-white capitalize">{post.title}</h2>
-                                                        <p className="text-xs font-normal text-gray-600 dark:text-gray-400">{post.location}</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            {/* author  */}
-                                            <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap capitalize">{post.username}</td>
-
-                                            <td className="px-4 py-4 text-sm whitespace-nowrap">
-                                                <div className="flex items-center gap-x-6">
-                                                    <button className="text-gray-700 bg-red-700/20 py-2 px-2 rounded-md transition-colors duration-200 hover:text-black focus:outline-none">
-                                                        Deactivate
-                                                    </button>
-
-                                                    <button className="text-blue-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                                        <ion-icon name="pencil"></ion-icon>
-                                                    </button>
-
-                                                    <button className="text-red-500 transition-colors duration-200 hover:text-red-800 focus:outline-none">
-                                                        <ion-icon name="trash"></ion-icon>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        <Post key={post.id} i={i} post={post} />
                                     ))}
                                 </tbody>
                             </table>
@@ -108,6 +76,7 @@ function Posts() {
                     lastUserIndex={lastUserIndex}
                 />
             </div>
+
 
         </section>
     </div>

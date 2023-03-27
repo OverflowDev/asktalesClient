@@ -29,7 +29,7 @@ function Home() {
     
       <div className='w-full'>
         <h1 className='text-center text-3xl font-bold uppercase underline underline-offset-2'>Stories</h1>
-        <Stories usr={usr} />
+          <Stories usr={usr} />
       </div>
       
     </div>

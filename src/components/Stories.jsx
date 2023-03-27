@@ -57,31 +57,32 @@ function Stories({usr}) {
     if (error) console.log(error)
 
   return (
-    <div className='mt-2 w-full md:px-24 px-6 ' >
+    <div className='mt-8 w-full md:px-24 px-6 ' >
+        <h1 className='text-center text-3xl font-bold uppercase underline underline-offset-2'>Stories</h1>
         {/* new post  */}
         <div className='flex justify-end'>
-        {user && <div>
-            {usr?.role === 'storyteller' && <div>
-                <button 
-                onClick={() => setShowNewPostButton(true)}
-                className='flex items-center px-4 py-2 bg-blue-200 hover:bg-blue-100 rounded-md space-x-2 shadow-inner text-black'
-                >
-                <ion-icon name="add-circle-outline"></ion-icon>
-                <span className='font-semibold'>New Story</span>
-                </button>
-            </div>}
-            {usr?.isAdmin && <div>
-                <button 
-                onClick={() => setShowNewPostButton(true)}
-                className='flex items-center px-4 py-2 bg-blue-200 hover:bg-blue-100 rounded-md space-x-2 shadow-inner text-black'
-                >
-                <ion-icon name="add-circle-outline"></ion-icon>
-                <span className='font-semibold'>New Post</span>
-                </button>
-            </div>
+            {user && <div>
+                {usr?.role === 'storyteller' && <div>
+                    <button 
+                    onClick={() => setShowNewPostButton(true)}
+                    className='flex items-center px-4 py-2 bg-blue-200 hover:bg-blue-100 rounded-md space-x-2 shadow-inner text-black'
+                    >
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                    <span className='font-semibold'>New Story</span>
+                    </button>
+                </div>}
+                {usr?.isAdmin && <div>
+                    <button 
+                    onClick={() => setShowNewPostButton(true)}
+                    className='flex items-center px-4 py-2 bg-blue-200 hover:bg-blue-100 rounded-md space-x-2 shadow-inner text-black'
+                    >
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                    <span className='font-semibold'>New Post</span>
+                    </button>
+                </div>
+                }
+                </div>
             }
-            </div>
-        }
         </div>
         {loading ? (
             <div className='flex justify-center'>
@@ -110,19 +111,13 @@ function Stories({usr}) {
 
                 <div>
                     {currentData.length > 0 ? (
-                        // <div class="text-gray-600 body-font ">
-                            <div className="container mx-auto ">
-                                <div className='flex flex-wrap'>
-                                    {/* <div class="p-4 md:w-1/3 flex "> */}
-                                        {/* <div class="h-full rounded-xl shadow-cla-blue bg-gradient-to-r from-indigo-50 to-blue-50 overflow-hidden"> */}
-                                            {currentData.map((post) => (
-                                                <Story key={post.id} post={post}  />
-                                            ))}
-                                        {/* </div> */}
-                                </div>
+                        <div className="container mx-auto ">
+                            <div className='flex flex-wrap'>
+                                {currentData.map((post) => (
+                                    <Story key={post.id} post={post}  />
+                                ))}
                             </div>
-                        //     </div>
-                        // </div>
+                        </div>
                     ): (
                         <div className='text-center tracking-wider font-semibold'>
                             No story at the moment, check back later
