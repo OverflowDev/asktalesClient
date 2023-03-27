@@ -83,8 +83,8 @@ export const FETCH_USERS_QUERY = gql`
 `
 
 export const DEACTIVATE_USER = gql`
-    mutation DeactivateUser {
-        deactivateUser {
+    mutation DeactivateUser($id: ID!) {
+        deactivateUser(id: $id) {
             id
             name
             email

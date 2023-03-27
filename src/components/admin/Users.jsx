@@ -2,11 +2,17 @@ import {useState} from 'react'
 
 import {useQuery, useMutation} from '@apollo/client'
 
-import {FETCH_USERS_QUERY} from '../../graphql/users'
+import {FETCH_USERS_QUERY, DEACTIVATE_USER} from '../../graphql/users'
 
 import UserPagination from './UserPagination'
+import { toast } from 'react-hot-toast'
+
+import EditUser from './EditUser'
 
 function Users() {
+
+    const [showEditButton, setShowEditButton] = useState(false)
+    const handleOnEditClose = () => setShowEditButton(false)
 
     // Get users 
     const {data, error, loading} = useQuery(FETCH_USERS_QUERY)
@@ -20,7 +26,23 @@ function Users() {
     const users = data?.getUsers.slice(firstUserIndex, lastUserIndex)
 
     // mutation 
-    const [DeactivateUser] = useMutation()
+    const [deactivateUser] = useMutation(DEACTIVATE_USER, {
+        onCompleted(){
+            toast.success('user deactivated')
+        }
+    })
+
+    const hanndleDeactivate = (id) => {
+        try {
+            deactivateUser({
+                variables: {
+                    id: id
+                }
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
   return (
     <div>
@@ -114,17 +136,31 @@ function Users() {
 
                                             <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                 <div className="flex items-center gap-x-6">
-                                                    <button className="text-gray-700 bg-red-700/20 py-2 px-2 rounded-md transition-colors duration-200 hover:text-black focus:outline-none">
+                                                    <button 
+                                                        onClick={() => hanndleDeactivate(user.id)}
+                                                        className="text-gray-700 bg-red-700/20 py-2 px-2 rounded-md transition-colors duration-200 hover:text-black focus:outline-none"
+                                                    >
                                                         Deactivate
                                                     </button>
 
-                                                    <button className="text-blue-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
+                                                    <button 
+                                                        onClick={(e) => {
+                                                            e.stopPropagation()
+                                                            setShowEditButton(true)
+                                                        }}
+                                                        className="text-blue-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none"
+                                                    >
                                                         <ion-icon name="pencil"></ion-icon>
                                                     </button>
+                                                    <EditUser 
+                                                        onClose={handleOnEditClose} 
+                                                        visible={showEditButton} 
+                                                        userId={user.id} 
+                                                    />
 
-                                                    <button className="text-red-500 transition-colors duration-200 hover:text-red-800 focus:outline-none">
+                                                    {/* <button className="text-red-500 transition-colors duration-200 hover:text-red-800 focus:outline-none">
                                                         <ion-icon name="trash"></ion-icon>
-                                                    </button>
+                                                    </button> */}
                                                 </div>
                                             </td>
                                         </tr>
