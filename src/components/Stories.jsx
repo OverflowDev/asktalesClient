@@ -68,10 +68,11 @@ function Stories({usr}) {
                     className='flex items-center px-4 py-2 bg-blue-200 hover:bg-blue-100 rounded-md space-x-2 shadow-inner text-black'
                     >
                     <ion-icon name="add-circle-outline"></ion-icon>
-                    <span className='font-semibold'>New Story</span>
+                    <span className='font-semibold'>New Post</span>
                     </button>
-                </div>}
-                {usr?.isAdmin && <div>
+                </div>
+                }
+                {/* {usr?.isAdmin && <div>
                     <button 
                     onClick={() => setShowNewPostButton(true)}
                     className='flex items-center px-4 py-2 bg-blue-200 hover:bg-blue-100 rounded-md space-x-2 shadow-inner text-black'
@@ -80,7 +81,7 @@ function Stories({usr}) {
                     <span className='font-semibold'>New Post</span>
                     </button>
                 </div>
-                }
+                } */}
                 </div>
             }
         </div>

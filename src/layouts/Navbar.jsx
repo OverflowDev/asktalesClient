@@ -111,14 +111,17 @@ function Navbar() {
                     delay-100 duration-500 z-30 ${open ? 'left-0' : 'left-[-100%]'}
                 `}>
                     <div className='flex py-4 flex-col'>
+                        <Link to='profile' className='py-3 text-center px-3 text-2xl uppercase font-semibold' onClick={closeMenu}>
+                            Profile
+                        </Link>
+                        <Link to='story' className='py-3 text-center px-3 text-2xl uppercase font-semibold' onClick={closeMenu}>
+                            Stories
+                        </Link>
                         <Link to='contact' className='py-3 text-center px-3 text-2xl uppercase font-semibold' onClick={closeMenu}>
                             Contact Us
                         </Link>
                         <Link to='about' className='py-3 text-center px-3 text-2xl uppercase font-semibold' onClick={closeMenu}>
                             About Us
-                        </Link>
-                        <Link to='profile' className='py-3 text-center px-3 text-2xl uppercase font-semibold' onClick={closeMenu}>
-                            Profile
                         </Link>
                         {/* <Link to='story' className='py-3 text-center px-3 text-2xl uppercase font-semibold' onClick={closeMenu}>
                             Stories
